@@ -1,0 +1,26 @@
+{
+  "name": "giveaway-bot",
+  "version": "1.0.0",
+  "description": "Discord bot for creating giveaways with requirement for entry as invite count, message count",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EchoKuroneko/giveaway-bot.git"
+  },
+  "keywords": [
+    "discord",
+    "giveaway",
+    "bot",
+    "discord-bot",
+    "giveaway-bot"
+  ],
+  "author": "Elysian Knight",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EchoKuroneko/giveaway-bot/issues"
+  },
+  "homepage": "https://github.com/EchoKuroneko/giveaway-bot#readme"
+}
