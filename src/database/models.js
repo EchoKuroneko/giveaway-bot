@@ -66,3 +66,10 @@ export async function fetchActiveGiveaways(guildId) {
 	};
 	return await gCollection.find(filter).toArray();
 }
+
+export async function deactivateGiveaway(guildId, gId, activity) {
+	// Mark giveaway as inactive in DB
+	await updateGiveaway(guildId, gId, {
+		$set: { active: !activity },
+	});
+}
