@@ -46,3 +46,13 @@ export async function getParticipantsByGiveawayId(guildId, gId) {
 	};
 	return await pCollection.find(filter).toArray();
 }
+
+export async function updateGiveaway(guildId, gId, query) {
+	const db = await getDatabase(dbName);
+	const gCollection = db.collection("events");
+	const filter = {
+		gId: gId,
+		"guild.id": guildId,
+	};
+	await gCollection.updateOne(filter, query);
+}
