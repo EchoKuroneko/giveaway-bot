@@ -43,3 +43,17 @@ export async function fetchBlacklist(guildId) {
 		return null;
 	}
 }
+
+export async function updateBlacklistData(guildId, update) {
+	const db = await getDatabase(dbName);
+	const bCollection = db.collection("blacklist");
+	const filter = {
+		"guild.guildId": guildId,
+	};
+	try {
+		return await bCollection.updateOne(filter, update);
+	} catch (error) {
+		console.log(`Error updating blacklist data: ${error}`);
+		return null;
+	}
+}
