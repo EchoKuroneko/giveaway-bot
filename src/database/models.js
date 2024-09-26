@@ -94,3 +94,41 @@ export async function deactivateGiveaway(guildId, gId, activity) {
 		$set: { active: !activity },
 	});
 }
+
+export async function updateParticipantStatus(
+	guildId,
+	gId,
+	userIds,
+	winnersQuery,
+	losersQuery
+) {
+	const db = await getDatabase(dbName);
+	const pCollection = db.collection("participants");
+	const winnersFilter = {
+		"guild.id": guildId,
+		gId: gId,
+		uId: { $in: userIds },
+	};
+
+	const losersFilter = {
+		"guild.id": guildId,
+		gId: gId,
+		uId: { $nin: userIds },
+	};
+	const operations = [
+		{
+			updateMany: {
+				filter: winnersFilter,
+				update: winnersQuery,
+			},
+		},
+		{
+			updateMany: {
+				filter: losersFilter,
+				update: losersQuery,
+			},
+		},
+	];
+
+	await pCollection.bulkWrite(operations);
+}
