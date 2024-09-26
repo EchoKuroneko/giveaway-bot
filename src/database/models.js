@@ -132,3 +132,10 @@ export async function updateParticipantStatus(
 
 	await pCollection.bulkWrite(operations);
 }
+
+export async function createRerollHistory(rerollData) {
+	const db = await getDatabase(dbName);
+	const rCollection = db.collection("reroll_history");
+	await rCollection.insertOne(rerollData);
+	console.log(`Reroll history for ${rerollData.gId} inserted in database!`);
+}
