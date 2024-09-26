@@ -37,6 +37,27 @@ export async function getGiveawayById(guildId, gId, active = true) {
 	}
 }
 
+export async function getNextGId(guildId) {
+	const db = await getDatabase(dbName);
+	const gCollection = db.collection("events");
+	const filter = {
+		"guild.id": guildId,
+	};
+	// Find the document with the highest gId
+	const lastGiveaway = await gCollection.findOne(filter, {
+		sort: { gId: -1 },
+	});
+
+	let nextId = 1; // Default to 1 if no documents exist
+	if (lastGiveaway && lastGiveaway.gId) {
+		// Extract the numeric part and increment it
+		const currentId = parseInt(lastGiveaway.gId.slice(1), 10);
+		nextId = currentId + 1;
+	}
+
+	return `g${nextId}`;
+}
+
 export async function getParticipantsByGiveawayId(guildId, gId) {
 	const db = await getDatabase(dbName);
 	pCollection = db.collection("participants");
