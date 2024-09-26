@@ -17,3 +17,13 @@ export async function fetchUserData(userId, guildId) {
 		return null;
 	}
 }
+
+export async function getUserMessages(userId, guildId) {
+	const result = await fetchUserData(userId, guildId);
+	return result.messages ? result.messages : 0;
+}
+
+export async function getUserInvites(userId, guildId) {
+	const result = await fetchUserData(userId, guildId);
+	return result.invites ? result.invites : 0;
+}
