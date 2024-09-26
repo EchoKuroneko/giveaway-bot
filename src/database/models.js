@@ -18,3 +18,21 @@ export async function createParticipant(participantData) {
 		`Participant ${participantData.uId} for ${participantData.gId} inserted in database!`
 	);
 }
+
+export async function getGiveawayById(guildId, gId, active = true) {
+	try {
+		const db = await getDatabase(dbName);
+		const gCollection = db.collection("events");
+		const filter = {
+			gId: gId,
+			"guild.id": guildId,
+		};
+		if (active) {
+			filter.active = true;
+		}
+		return await gCollection.findOne(filter);
+	} catch (error) {
+		console.error("Error fetching giveaway by ID:", error);
+		throw new Error("Database query failed");
+	}
+}
