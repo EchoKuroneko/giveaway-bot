@@ -28,3 +28,18 @@ export async function createBlacklist(guildId, guildName) {
 	}
 	return;
 }
+
+export async function fetchBlacklist(guildId) {
+	const db = await getDatabase(dbName);
+	const bCollection = db.collection("blacklist");
+	const filter = {
+		"guild.guildId": guildId,
+	};
+	try {
+		const result = await bCollection.findOne(filter);
+		return result;
+	} catch (error) {
+		console.log(`Error fetching blacklist data: ${error}`);
+		return null;
+	}
+}
