@@ -36,3 +36,13 @@ export async function getGiveawayById(guildId, gId, active = true) {
 		throw new Error("Database query failed");
 	}
 }
+
+export async function getParticipantsByGiveawayId(guildId, gId) {
+	const db = await getDatabase(dbName);
+	pCollection = db.collection("participants");
+	const filter = {
+		gId: gId,
+		"guild.id": guildId,
+	};
+	return await pCollection.find(filter).toArray();
+}
