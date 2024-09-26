@@ -56,3 +56,13 @@ export async function updateGiveaway(guildId, gId, query) {
 	};
 	await gCollection.updateOne(filter, query);
 }
+
+export async function fetchActiveGiveaways(guildId) {
+	const db = await getDatabase(dbName);
+	const gCollection = db.collection("events");
+	const filter = {
+		"guild.id": guildId,
+		active: true,
+	};
+	return await gCollection.find(filter).toArray();
+}
