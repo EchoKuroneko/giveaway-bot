@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Discord bot for creating giveaways with requirement for entry as invite count, message count",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,5 +23,10 @@
   "bugs": {
     "url": "https://github.com/EchoKuroneko/giveaway-bot/issues"
   },
-  "homepage": "https://github.com/EchoKuroneko/giveaway-bot#readme"
+  "homepage": "https://github.com/EchoKuroneko/giveaway-bot#readme",
+  "dependencies": {
+    "discord.js": "^14.16.2",
+    "dotenv": "^16.4.5",
+    "mongodb": "^6.9.0"
+  }
 }
