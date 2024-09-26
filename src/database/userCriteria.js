@@ -18,6 +18,13 @@ export async function fetchUserData(userId, guildId) {
 	}
 }
 
+export async function getUserCriteria(userId, guildId) {
+	const result = await fetchUserData(userId, guildId);
+	const messages = result.messages ? result.messages : 0;
+	const invites = result.invites ? result.invites : 0;
+	return [messages, invites];
+}
+
 export async function getUserMessages(userId, guildId) {
 	const result = await fetchUserData(userId, guildId);
 	return result.messages ? result.messages : 0;
